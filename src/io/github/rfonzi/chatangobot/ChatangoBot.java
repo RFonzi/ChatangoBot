@@ -9,5 +9,9 @@ public class ChatangoBot {
         ChatangoConnection chatangoConnection = new ChatangoConnection();
 
     }
+
+    public void sendMessage(){
+        
+    }
 }
 
