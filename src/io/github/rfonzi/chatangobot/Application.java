@@ -9,9 +9,7 @@ public class Application {
 
         ChatangoBot bot = new ChatangoBot();
 
-        while(true){
 
-        }
 
     }
 }

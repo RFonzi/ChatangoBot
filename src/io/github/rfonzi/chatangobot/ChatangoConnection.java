@@ -55,22 +55,11 @@ public class ChatangoConnection {
     }
 
     public void joinRoom(String room) throws IOException {
-//        roomURLString = "http://www." + room + ".chatango.com/";
-//        try {
-//            roomURL = new URL(roomURLString);
-//            roomConnection = roomURL.openConnection();
-//            roomConnection.setDoOutput(true);
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        System.out.println(roomConnection.getHeaderField("Set-Cookie"));
 
-        socket = new Socket("65.chatango.com", 80);
-        String tempRoomCode = "bauth:slixtest:1796458324681205:" + this.login + ":" + this.password + ".";
+        socket = new Socket("s65.chatango.com", 443);
+        String tempRoomCode = "bauth:slixtest:1689462054678210:" + this.login + ":" + this.password + "\0";
         OutputStream out = socket.getOutputStream();
+        out.write("v\0".getBytes());  //Might not need this
         out.write(tempRoomCode.getBytes());
     }
 
