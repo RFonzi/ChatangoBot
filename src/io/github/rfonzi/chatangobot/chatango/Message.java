@@ -5,9 +5,10 @@ public class Message {
     private String sender;
     private String text;
     private String font;
+    private long timestamp;
 
     public Message(){
-        
+
     }
 
     public String getFont() {
@@ -22,6 +23,10 @@ public class Message {
         return text;
     }
 
+    public long getTimestamp() {
+        return timestamp;
+    }
+
     public void setFont(String font) {
         this.font = font;
     }
@@ -32,5 +37,9 @@ public class Message {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }
