@@ -1,7 +1,8 @@
 package io.github.rfonzi.chatangobot.chatango;
 
 public class Fonts {
-    public static final String ARIAL = "";
+    public static final String ARIAL_JS = "";
+    public static final String ARIAL_FLASH = "0";
     public static final String COMIC = "1";
     public static final String GEORGIA = "2";
     public static final String HANDWRITING = "3";

@@ -41,7 +41,10 @@ public class Message {
     public void setFont(String font) {
 
         switch(font){
-            case Fonts.ARIAL:
+            case Fonts.ARIAL_JS:
+                font = "Arial";
+                break;
+            case Fonts.ARIAL_FLASH:
                 font = "Arial";
                 break;
             case Fonts.COMIC:
