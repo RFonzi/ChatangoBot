@@ -28,7 +28,7 @@ public class PacketFetcher implements Runnable {
             if(readByte == -1){ //Socket has been closed
                 running = false;
             }
-            if(readByte == 0){
+            else if(readByte == 0){
                 try {
                     packetTranslator.packetQueue.put(translatedPacket.toString());
                 } catch (InterruptedException e) {
