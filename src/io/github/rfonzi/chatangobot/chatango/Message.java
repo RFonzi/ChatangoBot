@@ -12,6 +12,17 @@ public class Message {
 
     public Message(){
 
+        setDefaults();
+
+    }
+
+    public void setDefaults(){
+        setSender("Name");
+        setText("Message body");
+        setFont("");
+        setFontSize(12);
+        setTimestamp(Long.toString(System.currentTimeMillis()));
+        setColorHex("FFFFFF");
     }
 
     public String getFont() {
@@ -94,7 +105,7 @@ public class Message {
     }
 
     public void setColorHex(String colorHex) {
-        if (colorHex.equals(null)){
+        if (colorHex.equals("null")){
             this.colorHex = "FFFFFF";
         }
         else{
