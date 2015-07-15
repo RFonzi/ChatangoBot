@@ -8,6 +8,7 @@ public class Bot {
     public PacketTranslator packetTranslator;
 
 
+
     public Bot() throws IOException {
 
         Connection connection = new Connection();
@@ -19,11 +20,9 @@ public class Bot {
 
         connection.joinRoom("slixtest");
 
-        packetFetcher = new PacketFetcher(connection.socket.getInputStream(), packetTranslator);
         packetTranslator = new PacketTranslator();
+        packetFetcher = new PacketFetcher(connection.socket.getInputStream(), packetTranslator);
 
-        packetFetcher.run();
-        packetTranslator.run();
 
     }
 }
