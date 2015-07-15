@@ -4,6 +4,9 @@ import java.io.IOException;
 
 public class Bot {
 
+    public PacketFetcher packetFetcher;
+    public PacketTranslator packetTranslator;
+
 
     public Bot() throws IOException {
 
@@ -16,8 +19,11 @@ public class Bot {
 
         connection.joinRoom("slixtest");
 
-        PacketFetcher packetFetcher = new PacketFetcher(connection.socket.getInputStream());
+        packetFetcher = new PacketFetcher(connection.socket.getInputStream(), packetTranslator);
+        packetTranslator = new PacketTranslator();
+
         packetFetcher.run();
+        packetTranslator.run();
 
     }
 }

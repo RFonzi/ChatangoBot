@@ -1,11 +1,14 @@
 package io.github.rfonzi.chatangobot.chatango;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
+
 import java.io.IOException;
 import java.io.InputStream;
 
 public class PacketFetcher implements Runnable {
 
     private final InputStream in;
+    private final PacketTranslator packetTranslator;
     private StringBuilder translatedPacket;
     int readByte;
 
@@ -27,6 +30,8 @@ public class PacketFetcher implements Runnable {
                 running = false;
             }
             if(readByte == 0){
+                packetTranslator.packetQueue.add(translatedPacket.toString());
+                translatedPacket.setLength(0);
 
             }
             else{
@@ -37,9 +42,11 @@ public class PacketFetcher implements Runnable {
 
     }
 
-    public PacketFetcher(InputStream socketInput){
+    public PacketFetcher(InputStream socketInput, PacketTranslator packetTranslator){
         this.in = socketInput;
-        translatedPacket = new StringBuilder();
+        this.translatedPacket = new StringBuilder();
+        this.packetTranslator = packetTranslator;
+
     }
 
 }
