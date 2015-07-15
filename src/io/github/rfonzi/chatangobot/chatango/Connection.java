@@ -1,4 +1,4 @@
-package io.github.rfonzi.chatangobot;
+package io.github.rfonzi.chatangobot.chatango;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -8,7 +8,7 @@ import java.net.URLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ChatangoConnection {
+public class Connection {
 
     private String login = ""; //Login goes here
     private String password = ""; //Password goes here
@@ -18,7 +18,7 @@ public class ChatangoConnection {
     URLConnection loginConnection;
     Socket socket;
 
-    public ChatangoConnection() {
+    public Connection() {
 
     }
 

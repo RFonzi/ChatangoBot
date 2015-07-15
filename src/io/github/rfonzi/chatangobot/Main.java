@@ -1,13 +1,15 @@
 package io.github.rfonzi.chatangobot;
 
 
+import io.github.rfonzi.chatangobot.chatango.Bot;
+
 import java.io.IOException;
 
-public class Application {
+public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        ChatangoBot bot = new ChatangoBot();
+        Bot bot = new Bot();
 
 
 
