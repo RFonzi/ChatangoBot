@@ -16,7 +16,7 @@ public class Connection {
 
     URL loginURL;
     URLConnection loginConnection;
-    Socket socket;
+    public Socket socket;
 
     public Connection() {
 

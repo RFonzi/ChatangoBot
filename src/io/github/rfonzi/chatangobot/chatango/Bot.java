@@ -1,6 +1,5 @@
 package io.github.rfonzi.chatangobot.chatango;
 
-
 import java.io.IOException;
 
 public class Bot {
@@ -16,6 +15,9 @@ public class Bot {
         System.out.println(connection.getAuthToken());
 
         connection.joinRoom("slixtest");
+
+        PacketFetcher packetFetcher = new PacketFetcher(connection.socket.getInputStream());
+        packetFetcher.run();
 
     }
 }
