@@ -6,7 +6,13 @@ public class Message {
     private String text;
     private String font;
     private int fontSize;
-    private long timestamp;
+    private String timestamp;
+
+
+
+
+
+    private String colorHex;
 
     public Message(){
 
@@ -28,8 +34,12 @@ public class Message {
         return text;
     }
 
-    public long getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
+    }
+
+    public String getColorHex() {
+        return colorHex;
     }
 
     public void setFont(String font) {
@@ -48,7 +58,11 @@ public class Message {
         this.text = text;
     }
 
-    public void setTimestamp(long timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public void setColorHex(String colorHex) {
+        this.colorHex = colorHex;
     }
 }
