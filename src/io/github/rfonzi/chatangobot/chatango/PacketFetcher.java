@@ -1,10 +1,7 @@
 package io.github.rfonzi.chatangobot.chatango;
 
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.concurrent.locks.LockSupport;
 
 public class PacketFetcher implements Runnable {
 
@@ -32,15 +29,12 @@ public class PacketFetcher implements Runnable {
                 running = false;
             }
             if(readByte == 0){
-                packetTranslator.packetQueue.add(translatedPacket.toString());
-                translatedPacket.setLength(0);
-                LockSupport.unpark(packetTranslator.translatorThread);
-
                 try {
-                    Thread.sleep(1); //Let the other thread catch up so no null values get introduced, not good with threads
+                    packetTranslator.packetQueue.put(translatedPacket.toString());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                translatedPacket.setLength(0);
             }
             else{
                 translatedPacket.append((char)readByte);

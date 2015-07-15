@@ -1,12 +1,11 @@
 package io.github.rfonzi.chatangobot.chatango;
 
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.locks.LockSupport;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class PacketTranslator implements Runnable {
 
     public final Thread translatorThread;
-    public ConcurrentLinkedQueue<String> packetQueue;
+    public LinkedBlockingQueue<String> packetQueue;
 
     @Override
     public void run() {
@@ -14,17 +13,18 @@ public class PacketTranslator implements Runnable {
         boolean running = true;
 
         while(running){
-            if(packetQueue.isEmpty()){
-                LockSupport.park();
+            try {
+                System.out.println(packetQueue.take());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
 
-            System.out.println(packetQueue.poll());
         }
 
     }
 
     public PacketTranslator(){
-        packetQueue = new ConcurrentLinkedQueue<>();
+        packetQueue = new LinkedBlockingQueue<>();
 
         translatorThread = new Thread(this);
         translatorThread.start();
