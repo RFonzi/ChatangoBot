@@ -94,9 +94,11 @@ public class Message {
     }
 
     public void setColorHex(String colorHex) {
-        if (colorHex == null){
-            colorHex = "FFFFFF";
+        if (colorHex.equals(null)){
+            this.colorHex = "FFFFFF";
         }
-        this.colorHex = colorHex;
+        else{
+            this.colorHex = colorHex;
+        }
     }
 }
