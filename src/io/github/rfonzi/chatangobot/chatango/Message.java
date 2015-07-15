@@ -7,12 +7,8 @@ public class Message {
     private String font;
     private int fontSize;
     private String timestamp;
-
-
-
-
-
     private String colorHex;
+
 
     public Message(){
 
@@ -63,6 +59,9 @@ public class Message {
     }
 
     public void setColorHex(String colorHex) {
+        if (colorHex == null){
+            colorHex = "FFFFFF";
+        }
         this.colorHex = colorHex;
     }
 }
