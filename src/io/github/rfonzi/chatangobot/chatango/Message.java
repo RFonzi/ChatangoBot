@@ -39,6 +39,38 @@ public class Message {
     }
 
     public void setFont(String font) {
+
+        switch(font){
+            case Fonts.ARIAL:
+                font = "Arial";
+                break;
+            case Fonts.COMIC:
+                font = "Comic Sans";
+                break;
+            case Fonts.GEORGIA:
+                font = "Georgia";
+                break;
+            case Fonts.HANDWRITING:
+                font = "Handwriting";
+                break;
+            case Fonts.IMPACT:
+                font = "Impact";
+                break;
+            case Fonts.PALATINO:
+                font = "Palatino";
+                break;
+            case Fonts.PAPYRUS:
+                font = "Papyrus";
+                break;
+            case Fonts.TIMES:
+                font = "Times New Roman";
+                break;
+            case Fonts.TYPEWRITER:
+                font = "Typewriter";
+                break;
+        }
+
+
         this.font = font;
     }
 
