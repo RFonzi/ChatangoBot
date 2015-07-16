@@ -3,11 +3,10 @@ package io.github.rfonzi.chatangobot.chatango;
 import java.util.ArrayList;
 
 enum CommandList implements ICommands{
-    SLIX {
+    EXAMPLE {
         @Override
         public void doAction() {
-            messageBuilder.message.setText("God dammit slix this is all your fault");
-            messageBuilder.message.setTextColorHex("000000");
+            messageBuilder.message.setText("Hi");
 
             messageSender.send(messageBuilder.toString());
 
@@ -15,8 +14,8 @@ enum CommandList implements ICommands{
 
         @Override
         public boolean conditions(String messageText) {
-            if(messageText.toLowerCase().startsWith("/slix")){
-                System.out.println(">> got slix command");
+            if(messageText.toLowerCase().contains("hi")){
+                System.out.println(">> got hi command");
                 return true;
             }
 
