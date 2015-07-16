@@ -21,7 +21,7 @@ public class Bot {
         connection.joinRoom("slixtest");
 
         packetTranslator = new PacketTranslator();
-        packetFetcher = new PacketFetcher(connection.socket.getInputStream(), packetTranslator);
+        packetFetcher = new PacketFetcher (packetTranslator);
 
 
     }

@@ -1,10 +1,7 @@
 package io.github.rfonzi.chatangobot.chatango;
 
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.Socket;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,7 +13,7 @@ public class Connection {
 
     URL loginURL;
     URLConnection loginConnection;
-    public Socket socket;
+    SocketInstance socketInstance;
 
     public Connection() {
 
@@ -46,10 +43,11 @@ public class Connection {
     }
 
     public void joinRoom(String room) throws IOException {
-        socket = new Socket("s65.chatango.com", 443); // Need to remove the need to hardcode this
+        socketInstance = SocketInstance.getInstance();// Need to remove the need to hardcode this
+        socketInstance.connect();
 
         String tempRoomCode = "bauth:" + room + "::" + this.login + ":" + this.password + "\0";
-        OutputStream out = socket.getOutputStream();
+        OutputStream out = socketInstance.socket.getOutputStream();
         //out.write("v\0".getBytes());  //Might not need this
         out.write(tempRoomCode.getBytes());
 

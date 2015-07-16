@@ -7,6 +7,7 @@ public class PacketFetcher implements Runnable {
 
     private final InputStream in;
     private final PacketTranslator packetTranslator;
+    SocketInstance socketInstance;
     private final Thread fetcherThread;
     private StringBuilder translatedPacket;
     int readByte;
@@ -46,8 +47,10 @@ public class PacketFetcher implements Runnable {
 
     }
 
-    public PacketFetcher(InputStream socketInput, PacketTranslator packetTranslator){
-        this.in = socketInput;
+    public PacketFetcher(PacketTranslator packetTranslator) throws IOException {
+        socketInstance = SocketInstance.getInstance();
+        this.in = socketInstance.socket.getInputStream();
+
         this.translatedPacket = new StringBuilder();
         this.packetTranslator = packetTranslator;
 
