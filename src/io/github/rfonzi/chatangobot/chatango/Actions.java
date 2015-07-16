@@ -17,6 +17,9 @@ public class Actions extends Thread {
 
             try {
                 message = messageQueue.queue.take();
+                if(message.getSender() == "g6795757"){ //Need to remove hardcode
+                    continue;
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
