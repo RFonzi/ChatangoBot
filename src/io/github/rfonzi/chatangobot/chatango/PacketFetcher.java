@@ -6,9 +6,8 @@ import java.io.InputStream;
 public class PacketFetcher implements Runnable {
 
     private final InputStream in;
-    private final PacketTranslator packetTranslator;
+    private final PacketQueue packetQueue;
     SocketInstance socketInstance;
-    private final Thread fetcherThread;
     private StringBuilder translatedPacket;
     int readByte;
 
@@ -31,7 +30,7 @@ public class PacketFetcher implements Runnable {
             }
             else if(readByte == 0){
                 try {
-                    packetTranslator.packetQueue.put(translatedPacket.toString());
+                    packetQueue.queue.put(translatedPacket.toString());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -47,14 +46,15 @@ public class PacketFetcher implements Runnable {
 
     }
 
-    public PacketFetcher(PacketTranslator packetTranslator) throws IOException {
+    public PacketFetcher() throws IOException {
         socketInstance = SocketInstance.getInstance();
         this.in = socketInstance.socket.getInputStream();
 
-        this.translatedPacket = new StringBuilder();
-        this.packetTranslator = packetTranslator;
+        packetQueue = PacketQueue.getInstance();
 
-        fetcherThread = new Thread(this);
+        this.translatedPacket = new StringBuilder();
+
+        Thread fetcherThread = new Thread(this);
         fetcherThread.start();
 
     }

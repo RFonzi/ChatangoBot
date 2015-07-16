@@ -1,6 +1,5 @@
 package io.github.rfonzi.chatangobot.chatango;
 
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,7 +13,7 @@ public class PacketTranslator implements Runnable {
     private final Pattern messagePattern;
     private final Pattern fontColorPattern;
     Matcher matcher;
-    public LinkedBlockingQueue<String> packetQueue;
+    PacketQueue packetQueue;
     private String workingString;
     private MessageQueue messageQueue;
 
@@ -25,7 +24,7 @@ public class PacketTranslator implements Runnable {
 
         while (running) {
             try {
-                workingString = packetQueue.take();
+                workingString = packetQueue.queue.take();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -83,7 +82,7 @@ public class PacketTranslator implements Runnable {
     }
 
     public PacketTranslator() {
-        packetQueue = new LinkedBlockingQueue<>();
+        packetQueue = PacketQueue.getInstance();
         messageQueue = MessageQueue.getInstance();
 
         timestampPattern = Pattern.compile("(?<=:)\\d+"); //matching timestamp

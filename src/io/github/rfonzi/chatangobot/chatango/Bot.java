@@ -22,10 +22,8 @@ public class Bot {
         connection.joinRoom("slixtest");
 
         packetTranslator = new PacketTranslator();
-        packetFetcher = new PacketFetcher (packetTranslator);
+        packetFetcher = new PacketFetcher ();
         actions = new Actions();
-
-
 
 
     }
