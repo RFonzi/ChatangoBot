@@ -6,6 +6,7 @@ public class Bot {
 
     public PacketFetcher packetFetcher;
     public PacketTranslator packetTranslator;
+    public Actions actions;
 
 
 
@@ -22,6 +23,9 @@ public class Bot {
 
         packetTranslator = new PacketTranslator();
         packetFetcher = new PacketFetcher (packetTranslator);
+        actions = new Actions();
+
+
 
 
     }
