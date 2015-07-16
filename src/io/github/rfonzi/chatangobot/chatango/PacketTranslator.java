@@ -65,7 +65,7 @@ public class PacketTranslator implements Runnable {
 
                 matcher = fontColorPattern.matcher(workingString);
                 if(matcher.find()){
-                    message.setColorHex(matcher.group());
+                    message.setTextColorHex(matcher.group());
                 }
 
 
