@@ -4,6 +4,7 @@ import java.io.IOException;
 
 public class Bot {
 
+    SocketInstance socketInstance;
     public PacketFetcher packetFetcher;
     public PacketTranslator packetTranslator;
     public Actions actions;
@@ -11,6 +12,9 @@ public class Bot {
 
 
     public Bot() throws IOException {
+
+        socketInstance = SocketInstance.getInstance();
+        socketInstance.connect();
 
         Connection connection = new Connection();
 
