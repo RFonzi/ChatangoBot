@@ -16,6 +16,7 @@ public class PacketTranslator implements Runnable {
     Matcher matcher;
     public LinkedBlockingQueue<String> packetQueue;
     private String workingString;
+    private MessageQueue messageQueue;
 
     @Override
     public void run() {
@@ -69,7 +70,12 @@ public class PacketTranslator implements Runnable {
                 }
 
 
-                System.out.println(message.getSender() + ": " + message.getText() + " (font: " + message.getFont() + ", size: " + message.getFontSize() + ", color: #" + message.getColorHex() + ")  | " + message.getTimestamp());
+                try {
+                    messageQueue.queue.put(message);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
             }
 
         }
@@ -78,6 +84,7 @@ public class PacketTranslator implements Runnable {
 
     public PacketTranslator() {
         packetQueue = new LinkedBlockingQueue<>();
+        messageQueue = MessageQueue.getInstance();
 
         timestampPattern = Pattern.compile("(?<=:)\\d+"); //matching timestamp
         senderPattern = Pattern.compile("(?<=\\d:)\\w+(?=:)"); //matching sender
