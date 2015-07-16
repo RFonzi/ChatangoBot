@@ -5,7 +5,7 @@ public class Actions extends Thread {
     MessageQueue messageQueue;
     Message message;
     Thread actionThread;
-    Commands commands;
+    String messageText;
 
 
     @Override
@@ -21,8 +21,14 @@ public class Actions extends Thread {
                 e.printStackTrace();
             }
 
-            System.out.println(message.getSender() + ": " + message.getText() + "  | " + message.getTimestamp());
-            System.out.println("[font = " + message.getFont() + " | color = #" + message.getColorHex() + " | size = " + message.getFontSize() + "]");
+            messageText = message.getText();
+
+            for(CommandList c : CommandList.values()){
+                if (c.conditions(messageText)){
+                    c.doAction();
+                    break;
+                }
+            }
 
         }
 
@@ -31,10 +37,9 @@ public class Actions extends Thread {
     public Actions(){
         messageQueue = MessageQueue.getInstance();
 
-
-
         actionThread = new Thread(this);
         actionThread.start();
+
     }
 
 }

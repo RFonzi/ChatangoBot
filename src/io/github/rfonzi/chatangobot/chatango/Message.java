@@ -23,10 +23,11 @@ public class Message {
     public void setDefaults(){
         setSender("Name");
         setText("Message body");
-        setFont("");
+        setFont("1");
         setFontSize(12);
         setTimestamp(Long.toString(System.currentTimeMillis()));
-        setTextColorHex("FFFFFF");
+        setTextColorHex("000");
+        setNameColorHex("000");
     }
 
     public String getFont() {
