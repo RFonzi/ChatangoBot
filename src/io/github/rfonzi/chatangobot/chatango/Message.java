@@ -7,7 +7,11 @@ public class Message {
     private String font;
     private int fontSize;
     private String timestamp;
-    private String colorHex;
+    private String textColorHex;
+
+
+
+    private String nameColorHex;
 
 
     public Message(){
@@ -22,7 +26,7 @@ public class Message {
         setFont("");
         setFontSize(12);
         setTimestamp(Long.toString(System.currentTimeMillis()));
-        setColorHex("FFFFFF");
+        setTextColorHex("FFFFFF");
     }
 
     public String getFont() {
@@ -45,8 +49,12 @@ public class Message {
         return timestamp;
     }
 
-    public String getColorHex() {
-        return colorHex;
+    public String getTextColorHex() {
+        return textColorHex;
+    }
+
+    public String getNameColorHex() {
+        return nameColorHex;
     }
 
     public void setFont(String font) {
@@ -104,12 +112,19 @@ public class Message {
         this.timestamp = timestamp;
     }
 
-    public void setColorHex(String colorHex) {
-        if (colorHex.equals("null")){
-            this.colorHex = "FFFFFF";
+    public void setTextColorHex(String textColorHex) {
+        if (textColorHex.equals("null")){
+            this.textColorHex = "FFFFFF";
         }
         else{
-            this.colorHex = colorHex;
+            this.textColorHex = textColorHex;
         }
     }
+
+    public void setNameColorHex(String nameColorHex) {
+        this.nameColorHex = nameColorHex;
+    }
 }
+
+
+
