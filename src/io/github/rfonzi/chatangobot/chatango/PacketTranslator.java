@@ -29,7 +29,7 @@ public class PacketTranslator implements Runnable {
                 e.printStackTrace();
             }
 
-            if (workingString.startsWith("i:") || workingString.startsWith("b:")) {
+            if (workingString.startsWith("b:")) {
                 //i:|timestamp|:|handle|::|first 8 digits of magic number!|:|odd string ending in ==|::0:<f x11="0">|message| #0D #0A #00
 
                 Message message = new Message();
