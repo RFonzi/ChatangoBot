@@ -32,6 +32,7 @@ public class Actions extends Thread {
                 e.printStackTrace();
             }
 
+
             messageText = message.getText().get(0); //Only support commands in the first font tag (for now)
 
             for (CommandList c : CommandList.values()) {
@@ -39,6 +40,12 @@ public class Actions extends Thread {
                     c.doAction();
                     break;
                 }
+            }
+
+            try {
+                Thread.sleep(2500); //Prevent flooding, not sure what the best value is
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
 
         }
