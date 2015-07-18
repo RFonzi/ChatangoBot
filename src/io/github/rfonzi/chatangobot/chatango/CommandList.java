@@ -1,12 +1,11 @@
 package io.github.rfonzi.chatangobot.chatango;
 
-import java.util.ArrayList;
-
 enum CommandList implements ICommands{
     EXAMPLE {
         @Override
         public void doAction() {
-            messageBuilder.message.setText("Hi");
+
+            messageBuilder.insertFontTag("12", "2D3", "Courier New", "Hi");
 
             messageSender.send(messageBuilder.toString());
 
