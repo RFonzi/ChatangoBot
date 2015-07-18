@@ -24,6 +24,7 @@ public class MessageSender{
         }
 
         try {
+            System.out.println("<< " + messageCode);
             out.write(messageCode.getBytes());
             out.flush();
         } catch (IOException e) {
