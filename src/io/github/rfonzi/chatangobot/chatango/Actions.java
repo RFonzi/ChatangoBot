@@ -17,14 +17,14 @@ public class Actions extends Thread {
 
             try {
                 message = messageQueue.queue.take();
-                if(message.getSender() == "g6795757"){ //Need to remove hardcode
+                if(message.getSender().equals("g6795757")){ //Need to remove hardcode
                     continue;
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
-            messageText = message.getText();
+            messageText = message.getText().get(0); //Only support commands in the first font tag (for now)
 
             for(CommandList c : CommandList.values()){
                 if (c.conditions(messageText)){
