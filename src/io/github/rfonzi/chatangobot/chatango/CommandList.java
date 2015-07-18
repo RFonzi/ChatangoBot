@@ -1,9 +1,11 @@
 package io.github.rfonzi.chatangobot.chatango;
 
+import java.util.Random;
+
 enum CommandList implements ICommands {
     EXAMPLE {
         @Override
-        public void doAction() {
+        public void doAction(Message message) {
 
             messageBuilder.insertFontTag("12", "2D3", "Courier New", "Hi");
             messageSender.send(messageBuilder.toString());
