@@ -22,7 +22,7 @@ public class MessageBuilder extends Message {
 
         for (int i = 0; i < message.getFont().size(); i++) {
 
-            if (!(message.getFontSize().get(i).isEmpty() && message.getFontColor().get(i).isEmpty() && message.getFont().get(i).isEmpty())){
+            if (!(message.getFontSize().get(i).isEmpty() && message.getFontColor().get(i).isEmpty() && message.getFont().get(i).isEmpty())) {
 
                 messageCode = messageCode.concat("<f  x" +
                         message.getFontSize().get(i) +

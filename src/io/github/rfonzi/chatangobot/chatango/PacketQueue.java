@@ -4,15 +4,15 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class PacketQueue {
 
-    public LinkedBlockingQueue<String> queue;
     private static PacketQueue instance = null;
+    public LinkedBlockingQueue<String> queue;
 
-    private PacketQueue(){
+    private PacketQueue() {
         queue = new LinkedBlockingQueue<>();
     }
 
-    public static PacketQueue getInstance(){
-        if(instance == null){
+    public static PacketQueue getInstance() {
+        if (instance == null) {
             instance = new PacketQueue();
         }
 

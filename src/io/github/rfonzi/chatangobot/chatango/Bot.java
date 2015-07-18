@@ -4,11 +4,10 @@ import java.io.IOException;
 
 public class Bot {
 
-    SocketInstance socketInstance;
     public PacketFetcher packetFetcher;
     public PacketTranslator packetTranslator;
     public Actions actions;
-
+    SocketInstance socketInstance;
 
 
     public Bot() throws IOException {
@@ -26,7 +25,7 @@ public class Bot {
         connection.joinRoom("slixtest");
 
         packetTranslator = new PacketTranslator();
-        packetFetcher = new PacketFetcher ();
+        packetFetcher = new PacketFetcher();
         actions = new Actions();
 
 

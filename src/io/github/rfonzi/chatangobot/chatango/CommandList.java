@@ -1,6 +1,6 @@
 package io.github.rfonzi.chatangobot.chatango;
 
-enum CommandList implements ICommands{
+enum CommandList implements ICommands {
     EXAMPLE {
         @Override
         public void doAction() {
@@ -13,7 +13,7 @@ enum CommandList implements ICommands{
 
         @Override
         public boolean conditions(String messageText) {
-            if(messageText.toLowerCase().contains("hi")){
+            if (messageText.toLowerCase().contains("hi")) {
                 System.out.println(">> got hi command");
                 return true;
             }
@@ -23,7 +23,7 @@ enum CommandList implements ICommands{
         }
     };
 
-    public MessageBuilder messageBuilder = new MessageBuilder();
     public static MessageSender messageSender = MessageSender.getInstance();
+    public MessageBuilder messageBuilder = new MessageBuilder();
 
 }

@@ -9,6 +9,15 @@ public class PacketTranslator implements Runnable {
     private String workingString;
     private MessageQueue messageQueue;
 
+    public PacketTranslator() {
+        packetQueue = PacketQueue.getInstance();
+        messageQueue = MessageQueue.getInstance();
+
+
+        translatorThread = new Thread(this);
+        translatorThread.start();
+    }
+
     @Override
     public void run() {
 
@@ -43,15 +52,6 @@ public class PacketTranslator implements Runnable {
 
         }
 
-    }
-
-    public PacketTranslator() {
-        packetQueue = PacketQueue.getInstance();
-        messageQueue = MessageQueue.getInstance();
-
-
-        translatorThread = new Thread(this);
-        translatorThread.start();
     }
 
 }

@@ -5,18 +5,18 @@ import java.net.Socket;
 
 public class SocketInstance implements IServer {
 
-    public Socket socket = null;
     private static SocketInstance instance = new SocketInstance();
+    public Socket socket = null;
 
-    private SocketInstance(){
+    private SocketInstance() {
     }
 
-    public static SocketInstance getInstance(){
+    public static SocketInstance getInstance() {
         return instance;
     }
 
     public void connect() throws IOException {
-        if(socket == null){
+        if (socket == null) {
             socket = new Socket(serverName, port);
         }
     }

@@ -4,15 +4,15 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class MessageQueue {
 
-    public LinkedBlockingQueue<Message> queue;
     private static MessageQueue instance = null;
+    public LinkedBlockingQueue<Message> queue;
 
-    private MessageQueue(){
+    private MessageQueue() {
         queue = new LinkedBlockingQueue<>();
     }
 
-    public static MessageQueue getInstance(){
-        if(instance == null){
+    public static MessageQueue getInstance() {
+        if (instance == null) {
             instance = new MessageQueue();
         }
 

@@ -1,21 +1,39 @@
 package io.github.rfonzi.chatangobot.chatango;
 
-import java.io.*;
-import java.net.*;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Connection implements Runnable {
-
-    private String login = ""; //Login goes here
-    private String password = ""; //Password goes here
-    private String loginURLString = "";
 
     URL loginURL;
     URLConnection loginConnection;
     SocketInstance socketInstance;
     Thread connectionThread;
     OutputStream out;
+    private String login = ""; //Login goes here
+    private String password = ""; //Password goes here
+    private String loginURLString = "";
+
+    public Connection() {
+        socketInstance = SocketInstance.getInstance();
+
+        try {
+            socketInstance.connect();
+            out = socketInstance.socket.getOutputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        connectionThread = new Thread(this);
+        connectionThread.start();
+
+
+    }
 
     @Override
     public void run() {
@@ -23,8 +41,7 @@ public class Connection implements Runnable {
         boolean running = true;
 
 
-
-        while(running){
+        while (running) {
 
             try {
                 out.write("\r\n\0".getBytes());
@@ -44,23 +61,6 @@ public class Connection implements Runnable {
 
     }
 
-    public Connection() {
-        socketInstance = SocketInstance.getInstance();
-
-        try {
-            socketInstance.connect();
-            out = socketInstance.socket.getOutputStream();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        connectionThread = new Thread(this);
-        connectionThread.start();
-
-
-    }
-
-
     public void setLoginInfo(String login, String password) {
 
         this.login = login;
@@ -75,7 +75,7 @@ public class Connection implements Runnable {
         Pattern pattern = Pattern.compile("\\Qauth.chatango.com=\\E(.*?);");
         Matcher matcher = pattern.matcher(cookieHeader);
 
-        if(matcher.find()){
+        if (matcher.find()) {
             authToken = matcher.group(1);
         }
 
