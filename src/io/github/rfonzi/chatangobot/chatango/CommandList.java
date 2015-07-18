@@ -7,7 +7,7 @@ enum CommandList implements ICommands {
         @Override
         public void doAction(Message message) {
 
-            messageBuilder.insertFontTag("12", "2D3", "Courier New", "Hi");
+            messageBuilder.insertFontTag("12", "2D3", "Courier New", "Hi @" + message.getSender());
             messageSender.send(messageBuilder.toString());
             messageBuilder.message.clear();
 
