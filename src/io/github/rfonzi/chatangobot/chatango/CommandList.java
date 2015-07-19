@@ -52,8 +52,40 @@ enum CommandList implements ICommands {
 
             return false;
         }
+    },
+    MODLIST{
+        @Override
+        public void doAction(Message message) {
+
+
+            messageBuilder.insertFontTag("12", "2D3", "Courier New", "Mods: ");
+
+            for(String s : roomInfo.modList){
+                messageBuilder.insertFontTag("", "", "", s + " ");
+            }
+            messageSender.send(messageBuilder.toString());
+
+            messageBuilder.message.clear();
+
+        }
+
+        @Override
+        public boolean conditions(Message message) {
+            if(!roomInfo.modList.contains(message.getSender().toLowerCase())){
+                return false;
+            }
+
+            if(message.getTextAsString().toLowerCase().startsWith("/modlist")){
+                System.out.println(">> Got modlist command");
+                return true;
+
+            }
+
+            return false;
+        }
     };
 
+    public RoomInfo roomInfo = RoomInfo.getInstance();
     public static MessageSender messageSender = MessageSender.getInstance();
     public MessageBuilder messageBuilder = new MessageBuilder();
 
