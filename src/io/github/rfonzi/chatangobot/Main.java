@@ -1,7 +1,7 @@
 package io.github.rfonzi.chatangobot;
 
 
-import io.github.rfonzi.chatangobot.chatango.Bot;
+import io.github.rfonzi.chatangobot.chatango.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,10 +15,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
 public class Main extends Application {
+
+    Connection connection;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("ChatangoBot");
@@ -48,17 +52,18 @@ public class Main extends Application {
 
         Button startButton = new Button();
         startButton.setText("Join");
-        startButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
+        startButton.setOnAction(event -> {
 
-                try {
-                    Bot bot = new Bot();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+            connection = new Connection();
+            connection.setLoginInfo(accountNameField.getCharacters().toString(), passwordField.getCharacters().toString());
+            connection.connect();
+            try {
+                connection.joinRoom(roomNameField.getCharacters().toString());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
+
         });
 
         grid.add(startButton, 2, 0);
@@ -67,6 +72,20 @@ public class Main extends Application {
 
         Scene scene = new Scene(grid);
         primaryStage.setScene(scene);
+        primaryStage.setOnCloseRequest(event -> {
+
+
+            if(State.getInstance().running) {
+                try {
+                    SocketInstance socketInstance = SocketInstance.getInstance();
+                    socketInstance.socket.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        });
         primaryStage.show();
 
     }
