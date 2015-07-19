@@ -3,19 +3,12 @@ package io.github.rfonzi.chatangobot;
 
 import io.github.rfonzi.chatangobot.chatango.*;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
@@ -25,6 +18,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        connection = new Connection();
+
+
         primaryStage.setTitle("ChatangoBot");
 
         GridPane grid = new GridPane();
@@ -54,14 +50,20 @@ public class Main extends Application {
         startButton.setText("Join");
         startButton.setOnAction(event -> {
 
-            connection = new Connection();
+            if(State.getInstance().running){
+                connection.stop();
+            }
+
             connection.setLoginInfo(accountNameField.getCharacters().toString(), passwordField.getCharacters().toString());
-            connection.connect();
+
             try {
-                connection.joinRoom(roomNameField.getCharacters().toString());
+                connection.setRoom(roomNameField.getCharacters().toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            connection.start();
+
 
 
         });
@@ -76,12 +78,7 @@ public class Main extends Application {
 
 
             if(State.getInstance().running) {
-                try {
-                    SocketInstance socketInstance = SocketInstance.getInstance();
-                    socketInstance.socket.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                connection.stop();
             }
 
 
