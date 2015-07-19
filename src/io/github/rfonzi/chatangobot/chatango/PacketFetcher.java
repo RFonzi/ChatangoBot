@@ -10,6 +10,7 @@ public class PacketFetcher implements Runnable {
     SocketInstance socketInstance;
     int readByte;
     private StringBuilder translatedPacket;
+    State state;
 
 
     public PacketFetcher() throws IOException {
@@ -20,26 +21,26 @@ public class PacketFetcher implements Runnable {
 
         this.translatedPacket = new StringBuilder();
 
-        Thread fetcherThread = new Thread(this);
-        fetcherThread.start();
+        state = State.getInstance();
+
+        state.fetcherThread = new Thread(this);
+        state.fetcherThread.start();
 
     }
 
     @Override
     public void run() {
 
-        boolean running = true;
-
-        while (running) {
+        while (!state.fetcherThread.isInterrupted()) {
             try {
                 readByte = in.read();
             } catch (IOException e) {
-                e.printStackTrace();
-                running = false;
+                state.fetcherThread.interrupt();
+                break;
             }
 
             if (readByte == -1) { //Socket has been closed
-                running = false;
+                state.running = false;
             } else if (readByte == 0) {
                 try {
                     packetQueue.queue.put(translatedPacket.toString());
@@ -53,6 +54,13 @@ public class PacketFetcher implements Runnable {
 
 
         }
+
+        System.out.println("||| Socket closed");
+        System.out.println("||| Packet Fetcher stopping...");
+
+        state.translatorThread.interrupt();
+        state.actionThread.interrupt();
+        state.connectionThread.interrupt();
 
     }
 

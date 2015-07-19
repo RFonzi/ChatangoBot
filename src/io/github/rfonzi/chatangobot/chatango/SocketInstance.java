@@ -18,6 +18,7 @@ public class SocketInstance implements IServer {
     public void connect() throws IOException {
         if (socket == null) {
             socket = new Socket(serverName, port);
+            State.getInstance().running = true;
         }
     }
 }
