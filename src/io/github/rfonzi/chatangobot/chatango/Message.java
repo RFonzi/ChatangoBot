@@ -191,6 +191,16 @@ public class Message {
 
     }
 
+    public String getTextAsString(){
+        String allText = "";
+
+        for(String s : getText()){
+            allText = allText + s;
+        }
+
+        return allText;
+    }
+
     public void clear(){
         this.setDefaults();
 
