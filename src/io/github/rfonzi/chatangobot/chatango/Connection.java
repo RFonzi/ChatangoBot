@@ -13,7 +13,7 @@ public class Connection implements Runnable {
     URL loginURL;
     URLConnection loginConnection;
     SocketInstance socketInstance;
-    Thread connectionThread;
+    State state;
     OutputStream out;
     private String login = ""; //Login goes here
     private String password = ""; //Password goes here
@@ -29,8 +29,19 @@ public class Connection implements Runnable {
             e.printStackTrace();
         }
 
-        connectionThread = new Thread(this);
-        connectionThread.start();
+        state = State.getInstance();
+        state.connectionThread = new Thread(this);
+        state.connectionThread.start();
+
+
+        try {
+            PacketTranslator packetTranslator = new PacketTranslator();
+            PacketFetcher packetFetcher = new PacketFetcher();
+            Actions actions = new Actions();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
 
     }
@@ -38,10 +49,7 @@ public class Connection implements Runnable {
     @Override
     public void run() {
 
-        boolean running = true;
-
-
-        while (running) {
+        while (!state.connectionThread.isInterrupted()) {
 
             try {
                 out.write("\r\n\0".getBytes());
@@ -54,10 +62,12 @@ public class Connection implements Runnable {
             try {
                 Thread.sleep(100000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                break;
             }
 
         }
+
+        System.out.println("||| Connection stopping...");
 
     }
 
@@ -101,7 +111,7 @@ public class Connection implements Runnable {
 
     public void connect() {
 
-        if (login == "" || password == "") {
+        if (login.equals("") || password.equals("")) {
             System.out.println("Login info not set.");
             return;
         } else if (loginURLString == "") {

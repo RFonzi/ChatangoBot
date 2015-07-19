@@ -1,35 +1,37 @@
 package io.github.rfonzi.chatangobot.chatango;
 
+import java.util.concurrent.TimeUnit;
+
 public class Actions extends Thread {
 
     MessageQueue messageQueue;
     Message message;
-    Thread actionThread;
     String messageText;
+    io.github.rfonzi.chatangobot.chatango.State state;
 
 
     public Actions() {
         messageQueue = MessageQueue.getInstance();
 
-        actionThread = new Thread(this);
-        actionThread.start();
+        state = io.github.rfonzi.chatangobot.chatango.State.getInstance(); //Why??
+
+        state.actionThread = new Thread(this);
+        state.actionThread.start();
 
     }
 
     @Override
     public void run() {
 
-        boolean running = true;
-
-        while (running) {
+        while (!state.actionThread.isInterrupted()) {
 
             try {
-                message = messageQueue.queue.take();
-                if (message.getSender().equals("g6795757")) { //Need to remove hardcode
+                message = messageQueue.queue.poll(5, TimeUnit.SECONDS);
+                if ( message == null || message.getSender().equals("g6795757")) { //Need to remove hardcode
                     continue;
                 }
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                break;
             }
 
 
@@ -49,6 +51,8 @@ public class Actions extends Thread {
             }
 
         }
+
+        System.out.println("||| Actions stopping...");
 
     }
 
