@@ -38,7 +38,7 @@ public class Main extends Application {
         Text passwordTitle = new Text("Pass:");
         grid.add(passwordTitle, 0, 1);
 
-        TextField passwordField = new TextField();
+        PasswordField passwordField = new PasswordField();
         grid.add(passwordField, 1, 1);
 
         Text roomNameTitle = new Text("Room:");
