@@ -22,6 +22,7 @@ public class Main extends Application {
 
 
         primaryStage.setTitle("ChatangoBot");
+        primaryStage.setResizable(false);
 
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
