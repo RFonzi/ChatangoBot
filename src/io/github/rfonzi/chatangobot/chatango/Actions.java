@@ -38,7 +38,7 @@ public class Actions extends Thread {
             messageText = message.getText().get(0); //Only support commands in the first font tag (for now)
 
             for (CommandList c : CommandList.values()) {
-                if (c.conditions(messageText)) {
+                if (c.conditions(message)) {
                     c.doAction(message);
                     break;
                 }

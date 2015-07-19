@@ -14,8 +14,8 @@ enum CommandList implements ICommands {
         }
 
         @Override
-        public boolean conditions(String messageText) {
-            if (messageText.toLowerCase().contains("hi")) {
+        public boolean conditions(Message message) {
+            if (message.getTextAsString().toLowerCase().contains("hi")) {
                 System.out.println(">> got hi command");
                 return true;
             }
@@ -44,8 +44,8 @@ enum CommandList implements ICommands {
         }
 
         @Override
-        public boolean conditions(String messageText) {
-            if (messageText.toLowerCase().startsWith("/roll")) {
+        public boolean conditions(Message message) {
+            if (message.getTextAsString().toLowerCase().startsWith("/roll")) {
                 System.out.println(">> got roll command");
                 return true;
             }
