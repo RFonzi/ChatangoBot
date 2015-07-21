@@ -26,8 +26,15 @@ public class Actions extends Thread {
         while (!state.actionThread.isInterrupted()) {
 
             try {
-                message = messageQueue.queue.poll(5, TimeUnit.SECONDS);
-                if ( message == null || message.getSender().equals("g6795757")) { //Need to remove hardcode
+                message = messageQueue.queue.take();
+                if ( message == null || message.getSender().toLowerCase().equals("slixmachine")) { //Need to remove hardcode
+                    continue;
+                }
+                Message nextMessage = messageQueue.queue.peek();
+
+                if (nextMessage != null &&
+                        message.getSender() == nextMessage.getSender() &&
+                        message.getTextAsString() == nextMessage.getTextAsString()){ //rudimentary duplicate detection
                     continue;
                 }
             } catch (InterruptedException e) {
