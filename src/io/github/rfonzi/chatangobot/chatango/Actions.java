@@ -54,7 +54,7 @@ public class Actions extends Thread {
             try {
                 Thread.sleep(2400); //Prevent flooding, not sure what the best value is
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                break;
             }
 
         }
