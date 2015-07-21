@@ -92,7 +92,7 @@ enum CommandList implements ICommands {
         public void doAction(Message message) {
 
 
-            messageBuilder.insertFontTag("12", "2D3", "Courier New", "Mods: ");
+            messageBuilder.insertFontTag(message.defaultFontSize, message.defaultFontColor, message.defaultFontFace, "Mods: ");
 
             for(String s : roomInfo.modList){
                 messageBuilder.insertFontTag("", "", "", s + " ");
