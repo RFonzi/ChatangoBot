@@ -3,27 +3,27 @@ package io.github.rfonzi.chatangobot.chatango;
 import java.util.Random;
 
 enum CommandList implements ICommands {
-    EXAMPLE {
-        @Override
-        public void doAction(Message message) {
-
-            messageBuilder.insertFontTag("12", "2D3", "Courier New", "Hi @" + message.getSender());
-            messageSender.send(messageBuilder.toString());
-            messageBuilder.message.clear();
-
-        }
-
-        @Override
-        public boolean conditions(Message message) {
-            if (message.getTextAsString().toLowerCase().contains("hi")) {
-                System.out.println(">> got hi command");
-                return true;
-            }
-
-            return false;
-
-        }
-    },
+//    EXAMPLE {
+//        @Override
+//        public void doAction(Message message) {
+//
+//            messageBuilder.insertFontTag(message.defaultFontSize, message.defaultFontColor, message.defaultFontFace, "Hi " + message.getSender() + "!!!");
+//            messageSender.send(messageBuilder.toString());
+//            messageBuilder.message.clear();
+//
+//        }
+//
+//        @Override
+//        public boolean conditions(Message message) {
+//            if (message.getTextAsString().toLowerCase().startsWith("hi")) {
+//                System.out.println(">> got hi command");
+//                return true;
+//            }
+//
+//            return false;
+//
+//        }
+//    },
     ROLL {
         @Override
         public void doAction(Message message) {
@@ -32,11 +32,11 @@ enum CommandList implements ICommands {
             int roll = random.nextInt(100) + 1;
 
             if(roll == 22){
-                messageBuilder.insertFontTag("12", "2D3", "Courier New", "@" + message.getSender() + " rolled 22 " + " \rhttp://i.imgur.com/PWs2oSO.png");
+                messageBuilder.insertFontTag(message.defaultFontSize, message.defaultFontColor, message.defaultFontFace, "@" + message.getSender() + " rolled 22 " + " http://i.imgur.com/PWs2oSO.png");
             } else if (roll % 11 == 0 || roll == 100){
-                messageBuilder.insertFontTag("12", "2D3", "Courier New", "@" + message.getSender() + " rolled " + roll + " \rhttp://i.imgur.com/IzO1LYs.png");
+                messageBuilder.insertFontTag(message.defaultFontSize, message.defaultFontColor, message.defaultFontFace, "@" + message.getSender() + " rolled " + roll + " http://i.imgur.com/IzO1LYs.png");
             } else {
-                messageBuilder.insertFontTag("12", "2D3", "Courier New", "@" + message.getSender() + " rolled " + roll);
+                messageBuilder.insertFontTag(message.defaultFontSize, message.defaultFontColor, message.defaultFontFace, "@" + message.getSender() + " rolled " + roll);
             }
 
             messageSender.send(messageBuilder.toString());
@@ -50,6 +50,40 @@ enum CommandList implements ICommands {
                 return true;
             }
 
+            return false;
+        }
+    },
+
+    USA {
+        @Override
+        public void doAction(Message message) {
+
+            Random random = new Random();
+            int roll = random.nextInt(6) + 1;
+
+            if (roll == 6){
+                messageBuilder.insertFontTag(message.defaultFontSize, "F00", message.defaultFontFace, "VIVA ME");
+                messageBuilder.insertFontTag(message.defaultFontSize, "FFF", message.defaultFontFace, "XI");
+                messageBuilder.insertFontTag(message.defaultFontSize, "0B0", message.defaultFontFace, "CO");
+            }
+            else {
+                for (int i = 0; i <= 10; i++) {
+                    messageBuilder.insertFontTag(message.defaultFontSize, "F00", message.defaultFontFace, "U");
+                    messageBuilder.insertFontTag(message.defaultFontSize, "FFF", message.defaultFontFace, "S");
+                    messageBuilder.insertFontTag(message.defaultFontSize, "00F", message.defaultFontFace, "A ");
+
+                }
+            }
+            messageSender.send(messageBuilder.toString());
+            messageBuilder.message.clear();
+
+        }
+
+        @Override
+        public boolean conditions(Message message) {
+            if (message.getTextAsString().contains("USA")){
+                return true;
+            }
             return false;
         }
     },
@@ -82,6 +116,46 @@ enum CommandList implements ICommands {
             }
 
             return false;
+        }
+    },
+    BOTRESPONSE{
+        @Override
+        public void doAction(Message message) {
+            Random random = new Random();
+            int roll = random.nextInt(50) + 1;
+
+            if(roll == 3){
+                messageBuilder.insertFontTag(message.defaultFontSize, message.defaultFontColor, message.defaultFontFace, "Shut up " + message.getSender());
+                messageSender.send(messageBuilder.toString());
+                messageBuilder.message.clear();
+            }
+
+        }
+
+        @Override
+        public boolean conditions(Message message) {
+            if(message.getSender().toLowerCase().equals("jigobot") || message.getSender().toLowerCase().equals("kilbroy")){
+                return true;
+            }
+            return false;
+        }
+    },
+    HONK{
+        @Override
+        public void doAction(Message message) {
+            Random random = new Random();
+            if((random.nextInt(100) + 1)  ==  4){
+                messageBuilder.insertFontTag(message.defaultFontSize, message.defaultFontColor, message.defaultFontFace, "Honk");
+                messageSender.send((messageBuilder.toString()));
+                messageBuilder.message.clear();
+            }
+
+
+        }
+
+        @Override
+        public boolean conditions(Message message) {
+            return true;
         }
     };
 
