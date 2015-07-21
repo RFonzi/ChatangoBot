@@ -6,6 +6,11 @@ import java.util.regex.Pattern;
 
 public class Message {
 
+    final String defaultFontFace = "Verdana";
+    final String defaultFontColor = "546223";
+    final String defaultFontSize = "14";
+    final String defaultNameColor = "828282";
+
     private String sender;
     private ArrayList<String> text;
     private ArrayList<String> font;
@@ -26,7 +31,7 @@ public class Message {
         font = new ArrayList<>();
         fontSize = new ArrayList<>();
         fontColor = new ArrayList<>();
-        setNameColor("000");
+        setNameColor(defaultNameColor);
         setSender("Default");
     }
 
