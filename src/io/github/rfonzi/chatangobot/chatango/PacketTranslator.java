@@ -1,5 +1,7 @@
 package io.github.rfonzi.chatangobot.chatango;
 
+import io.github.rfonzi.chatangobot.logging.Logger;
+
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -57,7 +59,7 @@ public class PacketTranslator implements Runnable {
             if (workingString.startsWith("b:")) { //Get message
                 //i:|timestamp|:|handle|::|first 8 digits of magic number!|:|odd string ending in ==|::0:<f x11="0">|message| #0D #0A #00
                 String[] workingStringSplit = workingString.split(":");
-                System.out.println(">> " + workingString);
+                Logger.debug(workingString);
 
                 Message message = new Message();
 
@@ -75,7 +77,7 @@ public class PacketTranslator implements Runnable {
 
         }
 
-        System.out.println("||| Packet Translator stopping...");
+        Logger.info("||| Packet Translator stopping...");
 
     }
 

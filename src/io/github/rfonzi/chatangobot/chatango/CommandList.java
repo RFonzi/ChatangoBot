@@ -1,5 +1,7 @@
 package io.github.rfonzi.chatangobot.chatango;
 
+import io.github.rfonzi.chatangobot.logging.Logger;
+
 import java.util.Random;
 
 enum CommandList implements ICommands {
@@ -16,7 +18,7 @@ enum CommandList implements ICommands {
 //        @Override
 //        public boolean conditions(Message message) {
 //            if (message.getTextAsString().toLowerCase().startsWith("hi")) {
-//                System.out.println(">> got hi command");
+//                Logger.debug(">> got hi command");
 //                return true;
 //            }
 //
@@ -46,7 +48,7 @@ enum CommandList implements ICommands {
         @Override
         public boolean conditions(Message message) {
             if (message.getTextAsString().toLowerCase().startsWith("/roll")) {
-                System.out.println(">> got roll command");
+                Logger.debug(">> got roll command");
                 return true;
             }
 
@@ -110,7 +112,7 @@ enum CommandList implements ICommands {
             }
 
             if(message.getTextAsString().toLowerCase().startsWith("/modlist")){
-                System.out.println(">> Got modlist command");
+                Logger.debug("Got modlist command");
                 return true;
 
             }

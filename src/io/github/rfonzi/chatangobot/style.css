@@ -1,0 +1,41 @@
+.content {
+    -fx-background-color: grey;
+    -fx-border-color: orange;
+}
+
+.text-area {
+    -fx-font-family: 'Inconsolata';
+    -fx-font-size: 18;
+    -fx-text-fill: orange;
+}
+
+.text-field {
+    -fx-background-color: grey;
+    -fx-text-fill: orange;
+}
+
+#account-name-title {
+    -fx-fill: orange;
+}
+
+#password-title {
+    -fx-fill: orange;
+}
+
+#room-name-title {
+    -fx-fill: orange;
+}
+
+.root {
+    -fx-background-color: dimgrey;
+}
+
+.button {
+
+}
+
+@font-face {
+    font-family: 'Inconsolata';
+    src: local('Inconsolata'), url('fonts/Inconsolata-Regular.ttf') format('truetype');
+}
+

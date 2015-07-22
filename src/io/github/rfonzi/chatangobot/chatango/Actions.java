@@ -1,5 +1,7 @@
 package io.github.rfonzi.chatangobot.chatango;
 
+import io.github.rfonzi.chatangobot.logging.Logger;
+
 import java.util.concurrent.TimeUnit;
 
 public class Actions extends Thread {
@@ -52,14 +54,14 @@ public class Actions extends Thread {
             }
 
             try {
-                Thread.sleep(2400); //Prevent flooding, not sure what the best value is
+                Thread.sleep(2500); //Prevent flooding, not sure what the best value is
             } catch (InterruptedException e) {
                 break;
             }
 
         }
 
-        System.out.println("||| Actions stopping...");
+        Logger.info("||| Actions stopping...");
 
     }
 
