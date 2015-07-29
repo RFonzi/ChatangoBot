@@ -21,7 +21,7 @@ public class Logger {
         log(Level.DEBUG, text);
     }
 
-    public void trace(String text){
+    public static void trace(String text){
         log(Level.TRACE, text);
     }
 
@@ -39,6 +39,16 @@ public class Logger {
         if(level == Level.TRACE) sb.append("TRACE: ");
 
         sb.append(text);
+
+        for(int i = 0; i < sb.length(); i++){
+            if(sb.charAt(i) == '\n'){
+                sb.replace(i, i + 1, "\\n");
+            }
+            else if(sb.charAt(i) == '\r'){
+                sb.replace(i, i + 1, "\\r");
+            }
+
+        }
 
         System.out.println(sb.toString());
 

@@ -59,7 +59,7 @@ public class PacketTranslator implements Runnable {
             if (workingString.startsWith("b:")) { //Get message
                 //i:|timestamp|:|handle|::|first 8 digits of magic number!|:|odd string ending in ==|::0:<f x11="0">|message| #0D #0A #00
                 String[] workingStringSplit = workingString.split(":");
-                Logger.debug(workingString);
+                Logger.debug(workingStringSplit[SENDER.ordinal()] + ": " + workingStringSplit[BODY.ordinal()]);
 
                 Message message = new Message();
 

@@ -1,41 +1,50 @@
 .content {
-    -fx-background-color: grey;
-    -fx-border-color: orange;
+    -fx-background-color: #E3F2FD;
+    -fx-border-color: rgba(0, 0, 0, 0);
 }
 
 .text-area {
-    -fx-font-family: 'Inconsolata';
-    -fx-font-size: 18;
-    -fx-text-fill: orange;
+    -fx-font-family: "Roboto Mono Light";
+    -fx-font-size: 14;
+    -fx-text-fill: rgba(0, 0, 0, .87);
+    -fx-wrap-text: true;
+    -fx-pref-width: 800;
+    -fx-pref-height: 200;
 }
 
 .text-field {
-    -fx-background-color: grey;
-    -fx-text-fill: orange;
+    -fx-font-family: "Roboto Light";
+    -fx-font-size: 13;
+    -fx-background-color: #E3F2FD;
+    -fx-text-fill: rgba(0, 0, 0, .87);
 }
 
 #account-name-title {
-    -fx-fill: orange;
+    -fx-font-family: "Roboto Light";
+    -fx-font-size: 15;
+    -fx-fill: rgba(255, 255, 255, 1);
 }
 
 #password-title {
-    -fx-fill: orange;
+    -fx-font-family: "Roboto Light";
+    -fx-font-size: 15;
+    -fx-fill: rgba(255, 255, 255, 1);
 }
 
 #room-name-title {
-    -fx-fill: orange;
+    -fx-font-family: "Roboto Light";
+    -fx-font-size: 15;
+    -fx-fill: rgba(255, 255, 255, 1);
 }
 
 .root {
-    -fx-background-color: dimgrey;
+    -fx-background-color: #1565C0;
 }
 
 .button {
+    -fx-font-family: "Roboto Light";
+    -fx-font-size: 15;
+    -fx-background-color: #64B5F6;
+    -fx-text-fill: rgba(0, 0, 0, .87);
 
 }
-
-@font-face {
-    font-family: 'Inconsolata';
-    src: local('Inconsolata'), url('fonts/Inconsolata-Regular.ttf') format('truetype');
-}
-
