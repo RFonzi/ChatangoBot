@@ -4,5 +4,5 @@ public interface ICommands {
 
     void doAction(Message message);
 
-    boolean conditions(String messageText);
+    boolean conditions(Message message);
 }

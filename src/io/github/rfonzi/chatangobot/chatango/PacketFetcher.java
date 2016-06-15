@@ -1,5 +1,7 @@
 package io.github.rfonzi.chatangobot.chatango;
 
+import io.github.rfonzi.chatangobot.logging.Logger;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -55,8 +57,8 @@ public class PacketFetcher implements Runnable {
 
         }
 
-        System.out.println("||| Socket closed");
-        System.out.println("||| Packet Fetcher stopping...");
+        Logger.info("Socket closed");
+        Logger.info("Packet Fetcher stopping...");
 
         state.translatorThread.interrupt();
         state.actionThread.interrupt();

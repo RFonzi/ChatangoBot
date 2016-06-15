@@ -2,7 +2,9 @@ package io.github.rfonzi.chatangobot.chatango;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
+import io.github.rfonzi.chatangobot.logging.Logger;
 import jdk.nashorn.internal.parser.JSONParser;
+import sun.rmi.runtime.Log;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -60,7 +62,7 @@ public class Connection implements Runnable {
             try {
                 out.write("\r\n\0".getBytes());
                 out.flush();
-                System.out.println("<< \\r\\n\\0 KEEPALIVE");
+                Logger.info("KEEPALIVE");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -73,7 +75,7 @@ public class Connection implements Runnable {
 
         }
 
-        System.out.println("||| Connection stopping...");
+        Logger.info("Connection stopping...");
 
     }
 
@@ -119,10 +121,10 @@ public class Connection implements Runnable {
     public void connect() {
 
         if (login.equals("") || password.equals("")) {
-            System.out.println("Login info not set.");
+            Logger.warn("Login info not set.");
             return;
         } else if (loginURLString == "") {
-            System.out.println("URL not build.");
+            Logger.warn("URL not build.");
             return;
         }
 

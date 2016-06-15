@@ -1,5 +1,7 @@
 package io.github.rfonzi.chatangobot.chatango;
 
+import io.github.rfonzi.chatangobot.logging.Logger;
+
 import java.util.concurrent.TimeUnit;
 
 public class Actions extends Thread {
@@ -26,8 +28,15 @@ public class Actions extends Thread {
         while (!state.actionThread.isInterrupted()) {
 
             try {
-                message = messageQueue.queue.poll(5, TimeUnit.SECONDS);
-                if ( message == null || message.getSender().equals("g6795757")) { //Need to remove hardcode
+                message = messageQueue.queue.take();
+                if ( message == null || message.getSender().toLowerCase().equals("slixmachine")) { //Need to remove hardcode
+                    continue;
+                }
+                Message nextMessage = messageQueue.queue.peek();
+
+                if (nextMessage != null &&
+                        message.getSender() == nextMessage.getSender() &&
+                        message.getTextAsString() == nextMessage.getTextAsString()){ //rudimentary duplicate detection
                     continue;
                 }
             } catch (InterruptedException e) {
@@ -35,24 +44,24 @@ public class Actions extends Thread {
             }
 
 
-            messageText = message.getText().get(0); //Only support commands in the first font tag (for now)
+            //messageText = message.getText().get(0); //Only support commands in the first font tag (for now)
 
             for (CommandList c : CommandList.values()) {
-                if (c.conditions(messageText)) {
+                if (c.conditions(message)) {
                     c.doAction(message);
                     break;
                 }
             }
 
             try {
-                Thread.sleep(2400); //Prevent flooding, not sure what the best value is
+                Thread.sleep(2500); //Prevent flooding, not sure what the best value is
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                break;
             }
 
         }
 
-        System.out.println("||| Actions stopping...");
+        Logger.info("||| Actions stopping...");
 
     }
 

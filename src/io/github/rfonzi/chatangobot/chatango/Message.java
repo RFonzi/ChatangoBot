@@ -6,6 +6,11 @@ import java.util.regex.Pattern;
 
 public class Message {
 
+    final String defaultFontFace = "Verdana";
+    final String defaultFontColor = "546223";
+    final String defaultFontSize = "14";
+    final String defaultNameColor = "828282";
+
     private String sender;
     private ArrayList<String> text;
     private ArrayList<String> font;
@@ -26,7 +31,7 @@ public class Message {
         font = new ArrayList<>();
         fontSize = new ArrayList<>();
         fontColor = new ArrayList<>();
-        setNameColor("000");
+        setNameColor(defaultNameColor);
         setSender("Default");
     }
 
@@ -142,7 +147,7 @@ public class Message {
         Pattern nameColorPattern = Pattern.compile("(?<=<n)\\w+");
         Pattern fontSizeAndColorPattern = Pattern.compile("(?<=<f x)\\w*");
         Pattern fontPattern = Pattern.compile("(?<==\")[\\w ]*");
-        Pattern textPattern = Pattern.compile("[\\/\\w\\s]+$");
+        Pattern textPattern = Pattern.compile("[\\.\"<\\\\|:;\\[\\]+=`{}*~,'?!$@%\\-^&()\\/\\w\\s]+$");
 
 
         Matcher matcher = nameColorPattern.matcher(body);
@@ -189,6 +194,16 @@ public class Message {
 
         //Need to replace regex with something else
 
+    }
+
+    public String getTextAsString(){
+        String allText = "";
+
+        for(String s : getText()){
+            allText = allText + s;
+        }
+
+        return allText;
     }
 
     public void clear(){
