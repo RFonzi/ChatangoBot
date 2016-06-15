@@ -12,3 +12,9 @@ hs_err_pid*
 # IDEA files #
 .idea/**
 **/*.iml
+
+# Dolphin-specific files #
+.directory
+
+# ChatangoBot-specific test files #
+settings.ini
