@@ -161,21 +161,6 @@ enum CommandList implements ICommands {
             return false;
         }
     },
-        @Override
-        public void doAction(Message message) {
-            Random random = new Random();
-            if((random.nextInt(100) + 1)  ==  4){
-                messageBuilder.insertFontTag(message.defaultFontSize, message.defaultFontColor, message.defaultFontFace, "Honk");
-                messageSender.send((messageBuilder.toString()));
-                messageBuilder.message.clear();
-            }
-
-
-        }
-
-        @Override
-        public boolean conditions(Message message) {
-            return true;
     HONK {
         @Override
         public void doAction(Message message) {
